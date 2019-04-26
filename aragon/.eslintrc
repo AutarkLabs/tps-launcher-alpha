@@ -1,0 +1,36 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "plugin:import/recommended",
+    "plugin:promise/recommended",
+    "standard",
+    "standard-react",
+    "prettier/react",
+    "plugin:prettier/recommended"
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "plugins": ["prettier", "react", "import", "promise"],
+  "rules": {
+    "import/no-unresolved": ["error", { ignore: ["^react(-dom)?$", "^styled-components$"] }],
+    "promise/no-nesting": ["off"],
+    "valid-jsdoc": "error",
+    "react/prop-types": 'warn',
+    "linebreak-style": ["error", "unix"],
+  },
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "16.6"
+    },
+  }
+}
