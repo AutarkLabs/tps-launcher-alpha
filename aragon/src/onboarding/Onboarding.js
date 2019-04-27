@@ -80,6 +80,10 @@ class Onboarding extends React.PureComponent {
     this.state.render = props.visible
   }
 
+  componentDidMount() {
+    this.handleTemplateSelect()
+  }
+
   componentWillReceiveProps(nextProps) {
     const { props } = this
 
@@ -106,6 +110,7 @@ class Onboarding extends React.PureComponent {
   reset = () => {
     this.setState({ ...initialState })
     this.props.onResetDaoBuilder()
+    this.handleTemplateSelect()
   }
 
   getSteps() {
@@ -211,9 +216,10 @@ class Onboarding extends React.PureComponent {
   }
 
   handleTemplateSelect = (template = null) => {
+    const tpsTemplate = [...Templates][2][0]
     this.setState({
-      template,
-      templateData: this.getInitialDataFromTemplate(template),
+      template: tpsTemplate,
+      templateData: this.getInitialDataFromTemplate(tpsTemplate),
     })
   }
 
