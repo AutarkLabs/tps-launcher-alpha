@@ -176,11 +176,13 @@ class StartContent extends React.PureComponent {
             weight="bold"
             color={theme.textDimmed}
           >
-            {smallMode ? 'Find an existing organization' : 'Welcome to Aragon'}
+            {smallMode
+              ? 'Find an existing organization'
+              : 'Create a Planning Suite DAO'}
           </Text>
         </Title>
 
-        <NetworkChooser>
+        {/* <NetworkChooser>
           <p>
             <Text size="large" color={theme.textSecondary}>
               {smallMode
@@ -216,16 +218,16 @@ class StartContent extends React.PureComponent {
               </Disclosure>
             )}
           </NetworkChooserContainer>
-        </NetworkChooser>
+        </NetworkChooser> */}
 
         <TwoActions>
           {!smallMode && (
             <Action>
-              <p>
+              {/* <p>
                 <Text size="large" color={theme.textSecondary}>
                   Then create a new organization
                 </Text>
-              </p>
+              </p> */}
               <Button
                 mode="strong"
                 onClick={this.props.onCreate}
@@ -236,7 +238,7 @@ class StartContent extends React.PureComponent {
               {this.renderWarning()}
             </Action>
           )}
-          <form onSubmit={onOpenOrganization}>
+          {/* <form onSubmit={onOpenOrganization}>
             <Action>
               <p>
                 <Text size="large" color={theme.textSecondary}>
@@ -301,7 +303,7 @@ class StartContent extends React.PureComponent {
                 </SubmitWrap>
               </OpenOrganization>
             </Action>
-          </form>
+          </form> */}
         </TwoActions>
         {demoDao && (
           <p>
