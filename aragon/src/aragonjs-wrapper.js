@@ -498,17 +498,23 @@ const templateParamFilters = {
     // supportNeeded: BN between 0 (0%) and 1e18 - 1 (99.99...%).
     // minAcceptanceQuorum: BN between 0 (0%) and 1e18 - 1(99.99...%).
     // voteDuration: Duration in seconds.
-    { name, supportNeeded, minAcceptanceQuorum, voteDuration },
+    {
+      dotMinAcceptanceQuorum,
+      name,
+      votingSupportNeeded,
+      votingMinAcceptanceQuorum,
+      voteDuration,
+    },
     account
   ) => {
     const percentageMax = new BN(10).pow(new BN(18))
     if (
-      supportNeeded.gte(percentageMax) ||
-      minAcceptanceQuorum.gte(percentageMax)
+      votingSupportNeeded.gte(percentageMax) ||
+      votingMinAcceptanceQuorum.gte(percentageMax)
     ) {
       throw new Error(
-        `supported needed ${supportNeeded.toString()} and minimum acceptance` +
-          `quorum (${minAcceptanceQuorum.toString()}) must be below 100%`
+        `supported needed ${votingSupportNeeded.toString()} and minimum acceptance` +
+          `quorum (${votingMinAcceptanceQuorum.toString()}) must be below 100%`
       )
     }
 
@@ -524,11 +530,12 @@ const templateParamFilters = {
     )
 
     return [
+      dotMinAcceptanceQuorum,
       name,
       accounts,
       stakes,
-      supportNeeded,
-      minAcceptanceQuorum,
+      votingSupportNeeded,
+      votingMinAcceptanceQuorum,
       voteDuration,
     ]
   },
@@ -575,16 +582,31 @@ export const initDaoBuilder = (
         },
       })
       const templateFilter = templateParamFilters[templateName]
-      const templateInstanceParams = templateFilter(
+
+      const [dotMinAcceptanceQuorum, ...newInstanceParams] = templateFilter(
         { name: organizationName, ...settings },
         account
       )
-      const tokenParams = [settings.tokenName, settings.tokenSymbol]
+
+      const dotSupportNeeded = 0 // Hardcoded to 0
+      const dotVoteDuration = newInstanceParams[newInstanceParams.length - 1]
+
+      const newTokenParams = [settings.tokenName, settings.tokenSymbol]
+
+      const planningAppsParams = [
+        dotSupportNeeded,
+        dotMinAcceptanceQuorum,
+        dotVoteDuration,
+      ]
+
+      console.log('Planning Apps Params:', planningAppsParams)
+
+      const tokenAndInstanceParams = [...newTokenParams, ...newInstanceParams]
 
       return templates.newDAO(
         templateName,
-        { params: tokenParams },
-        { params: templateInstanceParams }
+        { params: tokenAndInstanceParams },
+        { params: planningAppsParams }
       )
     },
   }

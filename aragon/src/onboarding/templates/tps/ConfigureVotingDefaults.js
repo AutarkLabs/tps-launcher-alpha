@@ -15,6 +15,7 @@ class ConfigureVotingDefaults extends React.Component {
     super(props)
     this.handleSupportChange = this.createChangeHandler('support')
     this.handleMinQuorumChange = this.createChangeHandler('minQuorum')
+    this.handleDotMinQuorumChange = this.createChangeHandler('dotMinQuorum')
     this.handleVoteDurationChange = this.createChangeHandler('voteDuration')
   }
   componentWillReceiveProps({ forceFocus }) {
@@ -43,6 +44,7 @@ class ConfigureVotingDefaults extends React.Component {
           fields={fields}
           handleSupportChange={this.handleSupportChange}
           handleMinQuorumChange={this.handleMinQuorumChange}
+          handleDotMinQuorumChange={this.handleDotMinQuorumChange}
           handleVoteDurationChange={this.handleVoteDurationChange}
           onSubmit={this.handleSubmit}
           formRef={this.handleFormRef}
@@ -57,6 +59,7 @@ class ConfigureVotingDefaultsContent extends React.PureComponent {
     const {
       fields,
       handleSupportChange,
+      handleDotMinQuorumChange,
       handleMinQuorumChange,
       handleVoteDurationChange,
       onSubmit,
@@ -93,6 +96,16 @@ class ConfigureVotingDefaultsContent extends React.PureComponent {
                   placeholder="e.g. 15"
                   value={fields.minQuorum === -1 ? '' : fields.minQuorum}
                   onChange={handleMinQuorumChange}
+                />
+              </InlineField>
+              <InlineField label="Dot Voting Min. Quorum">
+                <SymbolInput
+                  adornment="%"
+                  adornmentPosition="end"
+                  adornmentSettings={adornmentSettings}
+                  placeholder="e.g. 15"
+                  value={fields.dotMinQuorum === -1 ? '' : fields.dotMinQuorum}
+                  onChange={handleDotMinQuorumChange}
                 />
               </InlineField>
               <InlineField label="Vote Duration">
