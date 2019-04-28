@@ -181,6 +181,17 @@ class StartContent extends React.PureComponent {
               : 'Create a Planning Suite DAO'}
           </Text>
         </Title>
+          <p>
+            <Text size="large" color={theme.textSecondary}>
+              That Planning Suite is a suite of applications for Aragon that provides payout,
+              budgeting, and collaboration tools to supercharge worker-owned organizations.
+            <br />
+            <br />
+              With this template, you can create a new Rinkbey organization that comes
+              with the core Aragon apps: Voting, Finance, Token Manager, Vault, in addition to
+              the Planning Suite apps: Address Book, Allocations, Dot Voting, Projects and Rewards.{' '}
+            </Text>
+          </p>
 
         {/* <NetworkChooser>
           <p>
@@ -490,6 +501,7 @@ const Content = styled(animated.div)`
 
 const TwoActions = styled.div`
   width: 100%;
+  margin-top: 20px;
 
   ${breakpoint(
     'medium',

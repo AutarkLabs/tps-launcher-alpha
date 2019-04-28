@@ -181,9 +181,9 @@ const Transactions = styled.div`
 `
 
 const Transaction = styled.div`
-  width: 145px;
+  width: 220px;
   &:first-child {
-    margin-right: 145px;
+    margin-right: 90px;
   }
 `
 

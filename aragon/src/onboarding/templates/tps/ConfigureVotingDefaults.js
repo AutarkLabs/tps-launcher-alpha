@@ -1,9 +1,12 @@
 /* eslint react/prop-types: 0 */
 import React from 'react'
 import styled from 'styled-components'
-import { Field, TextInput, Text, theme } from '@aragon/ui'
+import { Field, TextInput, Text, theme, SafeLink } from '@aragon/ui'
 import { animated } from 'react-spring'
 import { noop } from '../../../utils'
+
+const TPS_GUIDE =
+  'https://github.com/AutarkLabs/planning-suite/blob/dev/docs/GETTING_STARTED.md#configure-voting-settings'
 
 class ConfigureVotingDefaults extends React.Component {
   static defaultProps = {
@@ -68,12 +71,12 @@ class ConfigureVotingDefaultsContent extends React.PureComponent {
     const adornmentSettings = { padding: 7 }
     return (
       <Content>
-        <Title>That Planning Suite DAO creation</Title>
+        <Title>Configure voting settings</Title>
         <StepContainer>
           <SubmitForm onSubmit={onSubmit} ref={formRef}>
             <TextContainer>
               <Text size="large" color={theme.textSecondary} align="center">
-                Choose your voting settings below. You can’t change the support
+                Choose your settings for the Voting and Dot Voting apps below. You can’t change the support
                 required later, so pick carefully.
               </Text>
             </TextContainer>
@@ -121,9 +124,16 @@ class ConfigureVotingDefaultsContent extends React.PureComponent {
             </Fields>
             <TextContainer>
               <Text size="xsmall" color={theme.textSecondary} align="left">
-                The support and minimum quorum thresholds are <em>strict</em>{' '}
+                The support and quorum thresholds are <em>strict</em>{' '}
                 requirements, such that votes will only pass if they achieve
-                approval percentages <em>greater than</em> these thresholds.
+                percentages <em>greater than</em> these thresholds.{' '}
+                  <StrongSafeLink
+                    href={TPS_GUIDE}
+                    target="_blank"
+                  >
+                    Find out more
+                  </StrongSafeLink>{' '}
+                  about these thresholds.
               </Text>
             </TextContainer>
           </SubmitForm>
@@ -166,6 +176,11 @@ const Title = styled.h1`
 const TextContainer = styled.p`
   text-align: center;
   max-width: 700px;
+`
+
+const StrongSafeLink = styled(SafeLink)`
+  text-decoration-color: ${theme.accent};
+  color: ${theme.accent};
 `
 
 const StepContainer = styled.div`

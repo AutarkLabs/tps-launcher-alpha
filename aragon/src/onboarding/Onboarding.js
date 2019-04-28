@@ -572,12 +572,12 @@ const Main = styled(animated.div)`
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-image: linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0.08) 0%,
-      rgba(0, 0, 0, 0.08) 100%
-    ),
-    linear-gradient(-226deg, #00f1e1 0%, #00b4e4 100%);
+
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Milky_Way_IR_Spitzer.jpg/1280px-Milky_Way_IR_Spitzer.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  
 
   ${breakpoint(
     'medium',
@@ -607,6 +607,7 @@ const Window = styled.div`
   width: 100vw;
   height: 100vh;
   background: #fff;
+
 
   ${breakpoint(
     'medium',
