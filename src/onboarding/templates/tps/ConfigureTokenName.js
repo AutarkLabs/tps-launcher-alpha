@@ -61,14 +61,14 @@ class ConfigureTokenNameContent extends React.PureComponent {
         } = this.props
         return (
             <Content>
-                <Title>That Planning Suite DAO creation</Title>
+                <Title>Token name and symbol</Title>
                 <StepContainer>
                     <SubmitForm onSubmit={onSubmit} ref={formRef}>
                         <p style={{ textAlign: 'center' }}>
                             <Text size="large" color={theme.textSecondary}>
                                 Choose the token name and symbol. You can’t change these later,
                                 so pick carefully.
-              </Text>
+                            </Text>
                         </p>
                         <Fields>
                             <Rows>
