@@ -2,10 +2,10 @@ import BN from 'bn.js'
 import resolvePathname from 'resolve-pathname'
 import Aragon, {
   providers,
-  setupTemplates,
   isNameUsed,
   ensResolve,
 } from '@aragon/wrapper'
+import { setupTemplates } from './tps-custom-wrapper'
 import {
   appOverrides,
   sortAppsPair,
@@ -118,7 +118,7 @@ const filterBalanceValue = value => {
 // Keep polling the main account.
 // See https://github.com/MetaMask/faq/blob/master/DEVELOPERS.md#ear-listening-for-selected-account-changes
 export const pollMainAccount = pollEvery(
-  (provider, { onAccount = () => {}, onBalance = () => {} } = {}) => {
+  (provider, { onAccount = () => { }, onBalance = () => { } } = {}) => {
     const web3 = getWeb3(provider)
     let lastAccount = null
     let lastBalance = getUnknownBalance()
@@ -328,9 +328,9 @@ const initWrapper = async (
   const isDomain = isValidEnsName(dao)
   const daoAddress = isDomain
     ? await resolveEnsDomain(dao, {
-        provider,
-        registryAddress: ensRegistryAddress,
-      })
+      provider,
+      registryAddress: ensRegistryAddress,
+    })
     : dao
 
   if (!daoAddress) {
@@ -429,7 +429,7 @@ const templateParamFilters = {
     ) {
       throw new Error(
         `supported needed ${supportNeeded.toString()} and minimum acceptance` +
-          `quorum (${minAcceptanceQuorum.toString()}) must be below 100%`
+        `quorum (${minAcceptanceQuorum.toString()}) must be below 100%`
       )
     }
 
@@ -468,13 +468,53 @@ const templateParamFilters = {
     if (neededSignatures < 1 || neededSignatures > signers.length) {
       throw new Error(
         `neededSignatures must be between 1 and the total number of signers (${
-          signers.length
+        signers.length
         })`,
         neededSignatures
       )
     }
 
     return [name, signers, neededSignatures]
+  },
+
+  tps: (
+    // name: String of organization name
+    // supportNeeded: BN between 0 (0%) and 1e18 - 1 (99.99...%).
+    // minAcceptanceQuorum: BN between 0 (0%) and 1e18 - 1(99.99...%).
+    // voteDuration: Duration in seconds.
+    { name, supportNeeded, minAcceptanceQuorum, voteDuration },
+    account
+  ) => {
+    const percentageMax = new BN(10).pow(new BN(18))
+    if (
+      supportNeeded.gte(percentageMax) ||
+      minAcceptanceQuorum.gte(percentageMax)
+    ) {
+      throw new Error(
+        `supported needed ${supportNeeded.toString()} and minimum acceptance` +
+        `quorum (${minAcceptanceQuorum.toString()}) must be below 100%`
+      )
+    }
+
+    const tokenBase = new BN(10).pow(new BN(18))
+    const holders = [{ address: account, balance: 1 }]
+
+    const [accounts, stakes] = holders.reduce(
+      ([accounts, stakes], holder) => [
+        [...accounts, holder.address],
+        [...stakes, tokenBase.muln(holder.balance)],
+      ],
+      [[], []]
+    )
+
+    return [
+      name,
+      accounts,
+      stakes,
+      supportNeeded,
+      minAcceptanceQuorum,
+      voteDuration,
+    ]
   },
 }
 
