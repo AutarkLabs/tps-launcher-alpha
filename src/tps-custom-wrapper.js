@@ -192,7 +192,7 @@ const Templates = (from, { apm, defaultGasPriceFn, web3 }) => {
             //     uint64 minAcceptanceQuorum,
             //     uint64 voteDuration
             // ) public
-            const [instance, token] = await newTokenAndInstance(
+            const [instance, tokenEvent] = await newTokenAndInstance(
                 template,
                 tokenAndInstanceParams
             )
@@ -205,16 +205,16 @@ const Templates = (from, { apm, defaultGasPriceFn, web3 }) => {
             //   uint256 minParticipationPct,
             //   uint64 voteDuration) public
 
-            const { dao, vault, voting, tokenAddr } = instance
+            const { dao, vault, voting, token } = instance
             const finalParams = {
-                params: [dao, vault, voting, tokenAddr, ...planningAppsParams.params],
+                params: [dao, vault, voting, token, ...planningAppsParams.params],
             }
             console.log('Planning App final Params:', finalParams)
 
             const tps = await newPlanningApps(template, finalParams)
             console.log('TPS Created', tps)
 
-            return [instance, token]
+            return [instance, tokenEvent]
         },
     }
 }
