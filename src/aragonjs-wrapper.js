@@ -1,10 +1,6 @@
 import BN from 'bn.js'
 import resolvePathname from 'resolve-pathname'
-import Aragon, {
-  providers,
-  isNameUsed,
-  ensResolve,
-} from '@aragon/wrapper'
+import Aragon, { providers, isNameUsed, ensResolve } from '@aragon/wrapper'
 import { setupTemplates } from './tps-custom-wrapper'
 import {
   appOverrides,
@@ -118,7 +114,7 @@ const filterBalanceValue = value => {
 // Keep polling the main account.
 // See https://github.com/MetaMask/faq/blob/master/DEVELOPERS.md#ear-listening-for-selected-account-changes
 export const pollMainAccount = pollEvery(
-  (provider, { onAccount = () => { }, onBalance = () => { } } = {}) => {
+  (provider, { onAccount = () => {}, onBalance = () => {} } = {}) => {
     const web3 = getWeb3(provider)
     let lastAccount = null
     let lastBalance = getUnknownBalance()
@@ -238,7 +234,7 @@ const subscribe = (
       )
     }),
     workers: apps.subscribe(apps => {
-      // Asynchronously launch webworkers for each new or updated app that has
+      // Asynchronously launch web-workers for each new or updated app that has
       // a background script defined
       applyAppOverrides(apps)
         .filter(app => app.script)
@@ -328,9 +324,9 @@ const initWrapper = async (
   const isDomain = isValidEnsName(dao)
   const daoAddress = isDomain
     ? await resolveEnsDomain(dao, {
-      provider,
-      registryAddress: ensRegistryAddress,
-    })
+        provider,
+        registryAddress: ensRegistryAddress,
+      })
     : dao
 
   if (!daoAddress) {
@@ -429,7 +425,7 @@ const templateParamFilters = {
     ) {
       throw new Error(
         `supported needed ${supportNeeded.toString()} and minimum acceptance` +
-        `quorum (${minAcceptanceQuorum.toString()}) must be below 100%`
+          `quorum (${minAcceptanceQuorum.toString()}) must be below 100%`
       )
     }
 
@@ -467,9 +463,7 @@ const templateParamFilters = {
 
     if (neededSignatures < 1 || neededSignatures > signers.length) {
       throw new Error(
-        `neededSignatures must be between 1 and the total number of signers (${
-        signers.length
-        })`,
+        `neededSignatures must be between 1 and the total number of signers (${signers.length})`,
         neededSignatures
       )
     }
@@ -498,7 +492,7 @@ const templateParamFilters = {
     ) {
       throw new Error(
         `supported needed ${votingSupportNeeded.toString()} and minimum acceptance` +
-        `quorum (${votingMinAcceptanceQuorum.toString()}) must be below 100%`
+          `quorum (${votingMinAcceptanceQuorum.toString()}) must be below 100%`
       )
     }
 
