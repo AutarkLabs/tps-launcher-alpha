@@ -294,6 +294,7 @@ const resolveEnsDomain = async (domain, opts) => {
   try {
     return await ensResolve(domain, opts)
   } catch (err) {
+    console.log('hubo un errorcito', err)
     if (err.message === 'ENS name not defined.') {
       return ''
     }
