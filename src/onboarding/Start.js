@@ -133,8 +133,8 @@ class StartContent extends React.PureComponent {
     return this.unknownBalance()
       ? '0'
       : formatBalance(balance, {
-          precision: BALANCE_DECIMALS,
-        })
+        precision: BALANCE_DECIMALS,
+      })
   }
 
   getNetworkChooserItems() {
@@ -176,11 +176,13 @@ class StartContent extends React.PureComponent {
             weight="bold"
             color={theme.textDimmed}
           >
-            {smallMode ? 'Find an existing organization' : 'Welcome to Aragon'}
+            {smallMode
+              ? 'Find an existing organization'
+              : 'Create a Planning Suite DAO'}
           </Text>
         </Title>
 
-        <NetworkChooser>
+        {/* <NetworkChooser>
           <p>
             <Text size="large" color={theme.textSecondary}>
               {smallMode
@@ -216,16 +218,16 @@ class StartContent extends React.PureComponent {
               </Disclosure>
             )}
           </NetworkChooserContainer>
-        </NetworkChooser>
+        </NetworkChooser> */}
 
         <TwoActions>
           {!smallMode && (
             <Action>
-              <p>
+              {/* <p>
                 <Text size="large" color={theme.textSecondary}>
                   Then create a new organization
                 </Text>
-              </p>
+              </p> */}
               <Button
                 mode="strong"
                 onClick={this.props.onCreate}
@@ -236,7 +238,7 @@ class StartContent extends React.PureComponent {
               {this.renderWarning()}
             </Action>
           )}
-          <form onSubmit={onOpenOrganization}>
+          {/* <form onSubmit={onOpenOrganization}>
             <Action>
               <p>
                 <Text size="large" color={theme.textSecondary}>
@@ -301,7 +303,7 @@ class StartContent extends React.PureComponent {
                 </SubmitWrap>
               </OpenOrganization>
             </Action>
-          </form>
+          </form> */}
         </TwoActions>
         {demoDao && (
           <p>
@@ -337,14 +339,14 @@ class StartContent extends React.PureComponent {
               as your Ethereum provider
             </React.Fragment>
           ) : (
-            <React.Fragment>
-              Please install an Ethereum provider (e.g.{' '}
-              <SafeLink href="https://metamask.io/" target="_blank">
-                MetaMask
+              <React.Fragment>
+                Please install an Ethereum provider (e.g.{' '}
+                <SafeLink href="https://metamask.io/" target="_blank">
+                  MetaMask
               </SafeLink>
-              )
+                )
             </React.Fragment>
-          )}
+            )}
           .
         </ActionInfo>
       )
@@ -403,11 +405,11 @@ const DomainStatus = styled(Text)`
   margin-left: 5px;
 
   ${breakpoint(
-    'medium',
-    `
+  'medium',
+  `
       margin: -10px 0 0 5px;
     `
-  )}
+)}
 `
 
 const SubmitWrap = styled.span`
@@ -415,22 +417,22 @@ const SubmitWrap = styled.span`
   display: flex;
 
   ${breakpoint(
-    'medium',
-    `
+  'medium',
+  `
       display: inline;
     `
-  )}
+)}
 `
 
 const StyledSubmitButton = styled(Button)`
   margin-left: auto;
 
   ${breakpoint(
-    'medium',
-    `
+  'medium',
+  `
       margin-left: unset;
     `
-  )}
+)}
 `
 
 const Warning = styled.div`
@@ -458,12 +460,12 @@ const Main = styled(animated.div)`
   background-position: 50% 16.666666vh;
 
   ${breakpoint(
-    'medium',
-    `
+  'medium',
+  `
       padding: 100px;
       background: none;
     `
-  )}
+)}
 
   @media (min-width: 1180px) {
     justify-content: flex-start;
@@ -479,26 +481,26 @@ const Content = styled(animated.div)`
   align-items: flex-start;
 
   ${breakpoint(
-    'medium',
-    `
+  'medium',
+  `
       justify-content: center;
     `
-  )}
+)}
 `
 
 const TwoActions = styled.div`
   width: 100%;
 
   ${breakpoint(
-    'medium',
-    `
+  'medium',
+  `
       display: flex;
       align-items: flex-start;
       > *:first-child {
         width: 400px;
       }
     `
-  )}
+)}
 `
 
 const NetworkChooser = styled.div`
@@ -509,25 +511,25 @@ const NetworkChooser = styled.div`
   }
 
   ${breakpoint(
-    'medium',
-    `
+  'medium',
+  `
       margin-bottom: 60px;
       > p:first-child {
         margin-bottom: 40px;
       }
     `
-  )}
+)}
 `
 
 const NetworkChooserContainer = styled.div`
   display: block;
 
   ${breakpoint(
-    'medium',
-    `
+  'medium',
+  `
       display: flex;
     `
-  )}
+)}
 `
 
 const StrongSafeLink = styled(SafeLink)`
@@ -573,23 +575,23 @@ const Title = styled.h1`
   margin-bottom: 45px;
 
   ${breakpoint(
-    'medium',
-    `
+  'medium',
+  `
       margin-bottom: 40px;
     `
-  )}
+)}
 `
 
 const OpenOrganization = styled.div`
   width: 100%;
 
   ${breakpoint(
-    'medium',
-    `
+  'medium',
+  `
       display: flex;
       flex-direction: column;
     `
-  )}
+)}
 `
 
 const StyledTextInput = styled(TextInput)`
@@ -597,12 +599,12 @@ const StyledTextInput = styled(TextInput)`
   margin-bottom: 10px;
 
   ${breakpoint(
-    'medium',
-    `
+  'medium',
+  `
       text-align: right;
       margin-bottom: 0;
     `
-  )}
+)}
 `
 
 const Field = styled.div`
@@ -614,8 +616,8 @@ const Field = styled.div`
   }
 
   ${breakpoint(
-    'medium',
-    `
+  'medium',
+  `
       display: flex;
       align-items: center;
 
@@ -623,7 +625,7 @@ const Field = styled.div`
         margin: 0 10px;
       }
     `
-  )}
+)}
 `
 
 const Status = styled.span`
