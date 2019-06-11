@@ -78,7 +78,7 @@ class ConfigureVotingDefaultsContent extends React.PureComponent {
                             </Text>
                         </TextContainer>
                         <Fields>
-                            <InlineField label="Support">
+                            <InlineField label="Voting (Support)">
                                 <SymbolInput
                                     adornment="%"
                                     adornmentPosition="end"
@@ -88,7 +88,7 @@ class ConfigureVotingDefaultsContent extends React.PureComponent {
                                     onChange={handleSupportChange}
                                 />
                             </InlineField>
-                            <InlineField label="Min. Quorum">
+                            <InlineField label="Voting (Min. Quorum)">
                                 <SymbolInput
                                     adornment="%"
                                     adornmentPosition="end"
@@ -98,7 +98,7 @@ class ConfigureVotingDefaultsContent extends React.PureComponent {
                                     onChange={handleMinQuorumChange}
                                 />
                             </InlineField>
-                            <InlineField label="Dot Voting Min. Quorum">
+                            <InlineField label="Dot Voting (Quorum)">
                                 <SymbolInput
                                     adornment="%"
                                     adornmentPosition="end"
@@ -123,8 +123,8 @@ class ConfigureVotingDefaultsContent extends React.PureComponent {
                             <Text size="xsmall" color={theme.textSecondary} align="left">
                                 The support and minimum quorum thresholds are <em>strict</em>{' '}
                                 requirements, such that votes will only pass if they achieve
-                approval percentages <em>greater than</em> these thresholds.
-              </Text>
+                                approval percentages <em>greater than</em> these thresholds.
+                            </Text>
                         </TextContainer>
                     </SubmitForm>
                 </StepContainer>
