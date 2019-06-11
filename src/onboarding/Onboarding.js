@@ -127,7 +127,7 @@ class Onboarding extends React.PureComponent {
 
     return [
       { screen: 'start', group: Steps.Start },
-      { screen: 'template', group: Steps.Template },
+      // { screen: 'template', group: Steps.Template },
       { screen: 'domain', group: Steps.Domain },
       ...configureSteps,
       { screen: 'sign', group: Steps.Launch },
