@@ -56,7 +56,7 @@ class SignContent extends React.PureComponent {
           <Transaction>
             <TransactionTitle>
               <Text weight="bold" color={theme.textSecondary} smallcaps>
-                Token creation
+                Token and Organization Creation
               </Text>
             </TransactionTitle>
             {this.renderTxStatus(daoCreationStatus)}
@@ -64,7 +64,7 @@ class SignContent extends React.PureComponent {
           <Transaction>
             <TransactionTitle>
               <Text weight="bold" color={theme.textSecondary} smallcaps>
-                Organization creation
+                Planning Suite Initialization
               </Text>
             </TransactionTitle>
             {this.renderTxStatus(daoCreationStatus)}
