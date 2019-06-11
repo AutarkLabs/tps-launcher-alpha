@@ -4,14 +4,14 @@ import styled from 'styled-components'
 import BN from 'bn.js'
 import {
   Button,
-  DropDown,
-  IconAttention,
-  IconCheck,
-  IconCross,
-  LoadingRing,
+  // DropDown,
+  // IconAttention,
+  // IconCheck,
+  // IconCross,
+  // LoadingRing,
   SafeLink,
   Text,
-  TextInput,
+  // TextInput,
   Viewport,
   breakpoint,
   theme,
@@ -32,13 +32,13 @@ import logo from './assets/logo-welcome.svg'
 
 import {
   DomainCheckNone,
-  DomainCheckPending,
-  DomainCheckAccepted,
-  DomainCheckRejected,
+  // DomainCheckPending,
+  // DomainCheckAccepted,
+  // DomainCheckRejected,
 } from './domain-states'
 
-const MAINNET_RISKS_BLOG_POST =
-  'https://blog.aragon.org/aragon-06-is-live-on-mainnet'
+// const MAINNET_RISKS_BLOG_POST =
+//   'https://blog.aragon.org/aragon-06-is-live-on-mainnet'
 
 const MINIMUM_BALANCE = new BN(toWei('0.1'))
 const BALANCE_DECIMALS = 3
@@ -153,10 +153,10 @@ class StartContent extends React.PureComponent {
       hasWallet,
       hasAccount,
       walletNetwork,
-      domain,
-      domainCheckStatus,
-      onDomainChange,
-      onOpenOrganization,
+      // domain,
+      // domainCheckStatus,
+      // onDomainChange,
+      // onOpenOrganization,
       smallMode,
     } = this.props
 
@@ -166,7 +166,7 @@ class StartContent extends React.PureComponent {
       hasAccount &&
       walletNetwork === network.type
 
-    const networkChooserItems = this.getNetworkChooserItems()
+    // const networkChooserItems = this.getNetworkChooserItems()
 
     return (
       <React.Fragment>
@@ -181,6 +181,18 @@ class StartContent extends React.PureComponent {
               : 'Create a Planning Suite DAO'}
           </Text>
         </Title>
+
+        <p>
+          <Text size="large" color={theme.textSecondary}>
+            That Planning Suite is a suite of applications for Aragon that provides payout,
+            budgeting, and collaboration tools to supercharge worker-owned organizations.
+            <br />
+            <br />
+            With this template, you can create a new Rinkeby organization that comes
+            with the core Aragon apps: Voting, Finance, Token Manager, Vault, in addition to
+            the Planning Suite apps: Address Book, Allocations, Dot Voting, Projects and Rewards.{' '}
+          </Text>
+        </p>
 
         {/* <NetworkChooser>
           <p>
@@ -400,40 +412,40 @@ class StartContent extends React.PureComponent {
   }
 }
 
-const DomainStatus = styled(Text)`
-  display: block;
-  margin-left: 5px;
+// const DomainStatus = styled(Text)`
+//   display: block;
+//   margin-left: 5px;
 
-  ${breakpoint(
-  'medium',
-  `
-      margin: -10px 0 0 5px;
-    `
-)}
-`
+//   ${breakpoint(
+//   'medium',
+//   `
+//       margin: -10px 0 0 5px;
+//     `
+// )}
+// `
 
-const SubmitWrap = styled.span`
-  height: 40px;
-  display: flex;
+// const SubmitWrap = styled.span`
+//   height: 40px;
+//   display: flex;
 
-  ${breakpoint(
-  'medium',
-  `
-      display: inline;
-    `
-)}
-`
+//   ${breakpoint(
+//   'medium',
+//   `
+//       display: inline;
+//     `
+// )}
+// `
 
-const StyledSubmitButton = styled(Button)`
-  margin-left: auto;
+// const StyledSubmitButton = styled(Button)`
+//   margin-left: auto;
 
-  ${breakpoint(
-  'medium',
-  `
-      margin-left: unset;
-    `
-)}
-`
+//   ${breakpoint(
+//   'medium',
+//   `
+//       margin-left: unset;
+//     `
+// )}
+// `
 
 const Warning = styled.div`
   background: rgba(255, 195, 70, 0.09);
@@ -490,6 +502,7 @@ const Content = styled(animated.div)`
 
 const TwoActions = styled.div`
   width: 100%;
+  margin-top: 20px;
 
   ${breakpoint(
   'medium',
@@ -503,50 +516,50 @@ const TwoActions = styled.div`
 )}
 `
 
-const NetworkChooser = styled.div`
-  width: 100%;
-  margin-bottom: 45px;
-  > p:first-child {
-    margin-bottom: 20px;
-  }
+// const NetworkChooser = styled.div`
+//   width: 100%;
+//   margin-bottom: 45px;
+//   > p:first-child {
+//     margin-bottom: 20px;
+//   }
 
-  ${breakpoint(
-  'medium',
-  `
-      margin-bottom: 60px;
-      > p:first-child {
-        margin-bottom: 40px;
-      }
-    `
-)}
-`
+//   ${breakpoint(
+//   'medium',
+//   `
+//       margin-bottom: 60px;
+//       > p:first-child {
+//         margin-bottom: 40px;
+//       }
+//     `
+// )}
+// `
 
-const NetworkChooserContainer = styled.div`
-  display: block;
+// const NetworkChooserContainer = styled.div`
+//   display: block;
 
-  ${breakpoint(
-  'medium',
-  `
-      display: flex;
-    `
-)}
-`
+//   ${breakpoint(
+//   'medium',
+//   `
+//       display: flex;
+//     `
+// )}
+// `
 
-const StrongSafeLink = styled(SafeLink)`
-  text-decoration-color: ${theme.accent};
-  color: ${theme.accent};
-`
+// const StrongSafeLink = styled(SafeLink)`
+//   text-decoration-color: ${theme.accent};
+//   color: ${theme.accent};
+// `
 
-const Disclosure = styled.div`
-  position: relative;
-  max-width: 400px;
-  margin-left: 50px;
-  & > span:first-child {
-    position: absolute;
-    top: -2px;
-    left: -25px;
-  }
-`
+// const Disclosure = styled.div`
+//   position: relative;
+//   max-width: 400px;
+//   margin-left: 50px;
+//   & > span:first-child {
+//     position: absolute;
+//     top: -2px;
+//     left: -25px;
+//   }
+// `
 
 const Action = styled.div`
   display: flex;
@@ -582,71 +595,71 @@ const Title = styled.h1`
 )}
 `
 
-const OpenOrganization = styled.div`
-  width: 100%;
+// const OpenOrganization = styled.div`
+//   width: 100%;
 
-  ${breakpoint(
-  'medium',
-  `
-      display: flex;
-      flex-direction: column;
-    `
-)}
-`
+//   ${breakpoint(
+//   'medium',
+//   `
+//       display: flex;
+//       flex-direction: column;
+//     `
+// )}
+// `
 
-const StyledTextInput = styled(TextInput)`
-  width: 100%;
-  margin-bottom: 10px;
+// const StyledTextInput = styled(TextInput)`
+//   width: 100%;
+//   margin-bottom: 10px;
 
-  ${breakpoint(
-  'medium',
-  `
-      text-align: right;
-      margin-bottom: 0;
-    `
-)}
-`
+//   ${breakpoint(
+//   'medium',
+//   `
+//       text-align: right;
+//       margin-bottom: 0;
+//     `
+// )}
+// `
 
-const Field = styled.div`
-  margin-bottom: 20px;
+// const Field = styled.div`
+//   margin-bottom: 20px;
 
-  label {
-    display: inline-block;
-    margin: 0 4px 0 8px;
-  }
+//   label {
+//     display: inline-block;
+//     margin: 0 4px 0 8px;
+//   }
 
-  ${breakpoint(
-  'medium',
-  `
-      display: flex;
-      align-items: center;
+//   ${breakpoint(
+//   'medium',
+//   `
+//       display: flex;
+//       align-items: center;
 
-      label {
-        margin: 0 10px;
-      }
-    `
-)}
-`
+//       label {
+//         margin: 0 10px;
+//       }
+//     `
+// )}
+// `
 
-const Status = styled.span`
-  position: relative;
-  width: 20px;
-  height: 20px;
-`
+// const Status = styled.span`
+//   position: relative;
+//   width: 20px;
+//   height: 20px;
+// `
 
-const CheckContainer = styled.span`
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  transform: scale(${({ active }) => (active ? '1, 1' : '0, 0')});
-  transform-origin: 50% 50%;
-  transition: transform 100ms ease-in-out;
-`
+// const CheckContainer = styled.span`
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   width: 20px;
+//   height: 20px;
+//   transform: scale(${({ active }) => (active ? '1, 1' : '0, 0')});
+//   transform-origin: 50% 50%;
+//   transition: transform 100ms ease-in-out;
+// `
 
 const ButtonLink = styled.button.attrs({ type: 'button' })`
   padding: 0;
