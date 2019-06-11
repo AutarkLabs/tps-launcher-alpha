@@ -40,10 +40,9 @@ const templates = {
     },
     tps: {
         name: 'That Planning Suite',
-
-        // TODO: Enable for rinkeby:
-        // appId: 'tps.open.aragonpm.eth',
-        appId: 'planning-suite-staging.open.aragonpm.eth',
+        appId: 'tps.open.aragonpm.eth',
+        // TODO: manage both enviroments? staging and rinkeby
+        // appId: 'planning-suite-staging.open.aragonpm.eth',
     },
 }
 
@@ -69,23 +68,45 @@ const templates = {
 * @return {Object} Factory object
 */
 const Templates = (from, { apm, defaultGasPriceFn, web3 }) => {
-    const newToken = async (template, { params, options = {} }) => {
-        const [tokenName, tokenSymbol] = params
-        const call = template.methods.newToken(tokenName, tokenSymbol)
+    // const newToken = async (template, { params, options = {} }) => {
+    //     const [tokenName, tokenSymbol] = params
+    //     const call = template.methods.newToken(tokenName, tokenSymbol)
+    //     const receipt = await call.send({
+    //         from,
+    //         ...(await applyCallGasOptions(call, options)),
+    //     })
+    //     return receipt.events.DeployToken.returnValues
+    // }
+
+    // const newInstance = async (template, { params, options = {} }) => {
+    // const call = template.methods.newInstance(...params)
+    // const receipt = await call.send({
+    // from,
+    // ...(await applyCallGasOptions(call, options)),
+    // })
+    // return receipt.events.DeployInstance.returnValues
+    // }
+
+    const newTokenAndInstance = async (template, { params, options = {} }) => {
+        const call = template.methods.newTokenAndInstance(...params)
         const receipt = await call.send({
             from,
             ...(await applyCallGasOptions(call, options)),
         })
-        return receipt.events.DeployToken.returnValues
+        return [
+            receipt.events.DeployInstance.returnValues,
+            receipt.events.DeployToken.returnValues,
+        ]
     }
 
-    const newInstance = async (template, { params, options = {} }) => {
-        const call = template.methods.newInstance(...params)
+    const newPlanningApps = async (template, { params, options = {} }) => {
+        const call = template.methods.newPlanningApps(...params)
         const receipt = await call.send({
             from,
             ...(await applyCallGasOptions(call, options)),
         })
-        return receipt.events.DeployInstance.returnValues
+        // return receipt.events.DeployPlanningApps.returnValues
+        return receipt
     }
 
     const applyCallGasOptions = async (call, txOptions = {}) => {
@@ -114,15 +135,19 @@ const Templates = (from, { apm, defaultGasPriceFn, web3 }) => {
          *   2. Create a new instance of a template (the token is cached in the template contract)
          *
          * @param {string} templateName name of the template to use
-         * @param {Object} tokenParams parameters for the token creation transaction
+     * @param {Object} tokenAndInstanceParams parameters for the token creation transaction
          * @param {Array<string>} tokenParams.params array of [<Token name>, <Token symbol>]
          * @param {Object} [tokenParams.options={}] transaction options
-         * @param {Object} instanceParams parameters for the DAO creation transaction
+     * @param {Object} planningAppsParams parameters for the DAO creation transaction
          * @param {Array<string>} tokenParams.params parameters for the template's `newDAO()` method
          * @param {Object} [instanceParams.options={}] transaction options
          * @return {Array<Object>} return values for `DeployEvent` and `DeployInstance`
          */
-        newDAO: async (templateName, tokenParams, instanceParams) => {
+        newDAO: async (
+            templateName,
+            tokenAndInstanceParams,
+            planningAppsParams
+        ) => {
             const tmplObj = templates[templateName]
 
             if (!tmplObj) throw new Error('No template found for that name')
@@ -140,10 +165,56 @@ const Templates = (from, { apm, defaultGasPriceFn, web3 }) => {
 
             const template = new web3.eth.Contract(abi, contractAddress)
 
-            const token = await newToken(template, tokenParams)
-            const instance = await newInstance(template, instanceParams)
+            /**
+            * function newToken(string tokenName, string tokenSymbol) public returns (MiniMeToken token)
+            */
+            // const token = await newToken(template, tokenParams)
+            /**
+             * function newInstance(
+             *    string aragonId,
+             *    address[] holders,
+             *    uint256[] stakes,
+             *    uint64 supportNeeded,
+             *    uint64 minAcceptanceQuorum,
+             *    uint64 voteDuration
+             * )
+             * public returns (Kernel dao, Vault vault, Voting voting)
+             */
+            // const instance = await newInstance(template, instanceParams)
 
-            return [token, instance]
+            //   function newTokenAndInstance(
+            //     string tokenName,
+            //     string tokenSymbol,
+            //     string aragonId,
+            //     address[] holders,
+            //     uint256[] tokens,
+            //     uint64 supportNeeded,
+            //     uint64 minAcceptanceQuorum,
+            //     uint64 voteDuration
+            // ) public
+            const [instance, token] = await newTokenAndInstance(
+                template,
+                tokenAndInstanceParams
+            )
+            // function newPlanningApps(
+            //   Kernel dao,
+            //   Vault vault,
+            //   Voting voting,
+            //   MiniMeToken token,
+            //   uint256 candidateSupportPct,
+            //   uint256 minParticipationPct,
+            //   uint64 voteDuration) public
+
+            const { dao, vault, voting, tokenAddr } = instance
+            const finalParams = {
+                params: [dao, vault, voting, tokenAddr, ...planningAppsParams.params],
+            }
+            console.log('Planning App final Params:', finalParams)
+
+            const tps = await newPlanningApps(template, finalParams)
+            console.log('TPS Created', tps)
+
+            return [instance, token]
         },
     }
 }
