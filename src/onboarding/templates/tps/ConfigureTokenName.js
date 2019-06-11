@@ -6,104 +6,104 @@ import { animated } from 'react-spring'
 import { noop } from '../../../utils'
 
 class ConfigureTokenName extends React.Component {
-    static defaultProps = {
-        onFieldUpdate: noop,
-        onSubmit: noop,
-        fields: {},
+  static defaultProps = {
+    onFieldUpdate: noop,
+    onSubmit: noop,
+    fields: {},
+  }
+  constructor(props) {
+    super(props)
+    this.handleTokenNameChange = this.createChangeHandler('tokenName')
+    this.handleTokenSymbolChange = this.createChangeHandler('tokenSymbol')
+  }
+  componentWillReceiveProps({ forceFocus }) {
+    if (forceFocus && forceFocus !== this.props.forceFocus) {
+      this.formEl.elements[0].focus()
     }
-    constructor(props) {
-        super(props)
-        this.handleTokenNameChange = this.createChangeHandler('tokenName')
-        this.handleTokenSymbolChange = this.createChangeHandler('tokenSymbol')
+  }
+  createChangeHandler(name) {
+    return event => {
+      const { onFieldUpdate, screen } = this.props
+      onFieldUpdate(screen, name, event.target.value)
     }
-    componentWillReceiveProps({ forceFocus }) {
-        if (forceFocus && forceFocus !== this.props.forceFocus) {
-            this.formEl.elements[0].focus()
-        }
-    }
-    createChangeHandler(name) {
-        return event => {
-            const { onFieldUpdate, screen } = this.props
-            onFieldUpdate(screen, name, event.target.value)
-        }
-    }
-    handleSubmit = event => {
-        event.preventDefault()
-        this.props.onSubmit()
-    }
-    handleFormRef = el => {
-        this.formEl = el
-    }
-    render() {
-        const { fields, screenTransitionStyles } = this.props
-        return (
-            <Main style={screenTransitionStyles}>
-                <ConfigureTokenNameContent
-                    fields={fields}
-                    handleTokenNameChange={this.handleTokenNameChange}
-                    handleTokenSymbolChange={this.handleTokenSymbolChange}
-                    onSubmit={this.handleSubmit}
-                    formRef={this.handleFormRef}
-                />
-            </Main>
-        )
-    }
+  }
+  handleSubmit = event => {
+    event.preventDefault()
+    this.props.onSubmit()
+  }
+  handleFormRef = el => {
+    this.formEl = el
+  }
+  render() {
+    const { fields, screenTransitionStyles } = this.props
+    return (
+      <Main style={screenTransitionStyles}>
+        <ConfigureTokenNameContent
+          fields={fields}
+          handleTokenNameChange={this.handleTokenNameChange}
+          handleTokenSymbolChange={this.handleTokenSymbolChange}
+          onSubmit={this.handleSubmit}
+          formRef={this.handleFormRef}
+        />
+      </Main>
+    )
+  }
 }
 
 class ConfigureTokenNameContent extends React.PureComponent {
-    render() {
-        const {
-            fields,
-            handleTokenNameChange,
-            handleTokenSymbolChange,
-            onSubmit,
-            formRef,
-        } = this.props
-        return (
-            <Content>
-                <Title>Token name and symbol</Title>
-                <StepContainer>
-                    <SubmitForm onSubmit={onSubmit} ref={formRef}>
-                        <p style={{ textAlign: 'center' }}>
-                            <Text size="large" color={theme.textSecondary}>
-                                Choose the token name and symbol. You can’t change these later,
-                                so pick carefully.
-                            </Text>
-                        </p>
-                        <Fields>
-                            <Rows>
-                                <Row>
-                                    <SuffixField label="Token Name">
-                                        <InputSized
-                                            width={200}
-                                            value={fields.tokenName}
-                                            onChange={handleTokenNameChange}
-                                            placeholder="My Organization Token"
-                                        />
-                                    </SuffixField>
-                                    <SuffixField label="Token Symbol">
-                                        <InputSized
-                                            width={80}
-                                            value={fields.tokenSymbol}
-                                            onChange={handleTokenSymbolChange}
-                                            placeholder="MOT"
-                                        />
-                                    </SuffixField>
-                                </Row>
-                            </Rows>
-                        </Fields>
-                    </SubmitForm>
-                </StepContainer>
-            </Content>
-        )
-    }
+  render() {
+    const {
+      fields,
+      handleTokenNameChange,
+      handleTokenSymbolChange,
+      onSubmit,
+      formRef,
+    } = this.props
+    return (
+      <Content>
+        <Title>Token name and symbol</Title>
+        <StepContainer>
+          <SubmitForm onSubmit={onSubmit} ref={formRef}>
+            <p style={{ textAlign: 'center' }}>
+              <Text size="large" color={theme.textSecondary}>
+                Choose the token name and symbol. You can’t change these later,
+                so pick carefully.
+              </Text>
+            </p>
+            <Fields>
+              <Rows>
+                <Row>
+                  <SuffixField label="Token Name">
+                    <InputSized
+                      width={200}
+                      value={fields.tokenName}
+                      onChange={handleTokenNameChange}
+                      placeholder="My Organization Token"
+                    />
+                  </SuffixField>
+                  <SuffixField label="Token Symbol">
+                    <InputSized
+                      width={80}
+                      value={fields.tokenSymbol}
+                      onChange={handleTokenSymbolChange}
+                      placeholder="MOT"
+                    />
+                  </SuffixField>
+                </Row>
+              </Rows>
+            </Fields>
+          </SubmitForm>
+        </StepContainer>
+      </Content>
+    )
+  }
 }
 
 const SubmitForm = React.forwardRef(({ children, ...props }, ref) => (
-    <form {...props} ref={ref}>
-        {children}
-        <input type="submit" style={{ display: 'none' }} />
-    </form>
+  <form {...props} ref={ref}>
+    {children}
+    <input type="submit" style={{ display: 'none' }} />
+  </form>
 ))
 
 const Main = styled(animated.div)`

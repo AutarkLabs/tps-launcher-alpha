@@ -84,7 +84,6 @@ class Onboarding extends React.PureComponent {
     this.handleTemplateSelect()
   }
 
-
   componentWillReceiveProps(nextProps) {
     const { props } = this
 
@@ -120,9 +119,9 @@ class Onboarding extends React.PureComponent {
     // Prepare the configure steps to be inserted
     const configureSteps = Templates.has(template)
       ? Templates.get(template).screens.map(step => ({
-        ...step,
-        group: Steps.Configure,
-      }))
+          ...step,
+          group: Steps.Configure,
+        }))
       : []
 
     return [
@@ -402,8 +401,8 @@ class Onboarding extends React.PureComponent {
               transform: visible
                 ? 'none'
                 : showProgress.interpolate(
-                  v => `translate3d(0, ${110 * (1 - v)}%, 0)`
-                ),
+                    v => `translate3d(0, ${110 * (1 - v)}%, 0)`
+                  ),
               opacity: showProgress,
             }}
           >
@@ -578,11 +577,11 @@ const Main = styled(animated.div)`
   background-size: cover;
 
   ${breakpoint(
-  'medium',
-  `
+    'medium',
+    `
       overflow: auto;
     `
-)}
+  )}
 `
 
 const View = styled.div`
@@ -592,12 +591,12 @@ const View = styled.div`
   flex-grow: 1;
 
   ${breakpoint(
-  'medium',
-  `
+    'medium',
+    `
       min-width: 800px;
       padding: 50px;
     `
-)}
+  )}
 `
 
 const Window = styled.div`
@@ -607,14 +606,14 @@ const Window = styled.div`
   background: #fff;
 
   ${breakpoint(
-  'medium',
-  `
+    'medium',
+    `
       width: 1080px;
       height: 660px;
       border-radius: 3px;
       box-shadow: 0 10px 28px 0 rgba(11, 103, 157, 0.7);
     `
-)}
+  )}
 `
 
 const Screen = styled.div`
@@ -627,11 +626,11 @@ const Screen = styled.div`
   pointer-events: ${({ active }) => (active ? 'auto' : 'none')};
 
   ${breakpoint(
-  'medium',
-  `
+    'medium',
+    `
       overflow: hidden;
     `
-)}
+  )}
 `
 
 export default Onboarding

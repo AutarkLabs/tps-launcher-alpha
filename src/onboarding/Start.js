@@ -133,8 +133,8 @@ class StartContent extends React.PureComponent {
     return this.unknownBalance()
       ? '0'
       : formatBalance(balance, {
-        precision: BALANCE_DECIMALS,
-      })
+          precision: BALANCE_DECIMALS,
+        })
   }
 
   getNetworkChooserItems() {
@@ -184,13 +184,15 @@ class StartContent extends React.PureComponent {
 
         <p>
           <Text size="large" color={theme.textSecondary}>
-            That Planning Suite is a suite of applications for Aragon that provides payout,
-            budgeting, and collaboration tools to supercharge worker-owned organizations.
+            That Planning Suite is a suite of applications for Aragon that
+            provides payout, budgeting, and collaboration tools to supercharge
+            worker-owned organizations.
             <br />
             <br />
-            With this template, you can create a new Rinkeby organization that comes
-            with the core Aragon apps: Voting, Finance, Token Manager, Vault, in addition to
-            the Planning Suite apps: Address Book, Allocations, Dot Voting, Projects and Rewards.{' '}
+            With this template, you can create a new Rinkeby organization that
+            comes with the core Aragon apps: Voting, Finance, Token Manager,
+            Vault, in addition to the Planning Suite apps: Address Book,
+            Allocations, Dot Voting, Projects and Rewards.{' '}
           </Text>
         </p>
 
@@ -351,14 +353,14 @@ class StartContent extends React.PureComponent {
               as your Ethereum provider
             </React.Fragment>
           ) : (
-              <React.Fragment>
-                Please install an Ethereum provider (e.g.{' '}
-                <SafeLink href="https://metamask.io/" target="_blank">
-                  MetaMask
+            <React.Fragment>
+              Please install an Ethereum provider (e.g.{' '}
+              <SafeLink href="https://metamask.io/" target="_blank">
+                MetaMask
               </SafeLink>
-                )
+              )
             </React.Fragment>
-            )}
+          )}
           .
         </ActionInfo>
       )
@@ -472,12 +474,12 @@ const Main = styled(animated.div)`
   background-position: 50% 16.666666vh;
 
   ${breakpoint(
-  'medium',
-  `
+    'medium',
+    `
       padding: 100px;
       background: none;
     `
-)}
+  )}
 
   @media (min-width: 1180px) {
     justify-content: flex-start;
@@ -493,11 +495,11 @@ const Content = styled(animated.div)`
   align-items: flex-start;
 
   ${breakpoint(
-  'medium',
-  `
+    'medium',
+    `
       justify-content: center;
     `
-)}
+  )}
 `
 
 const TwoActions = styled.div`
@@ -505,15 +507,15 @@ const TwoActions = styled.div`
   margin-top: 20px;
 
   ${breakpoint(
-  'medium',
-  `
+    'medium',
+    `
       display: flex;
       align-items: flex-start;
       > *:first-child {
         width: 400px;
       }
     `
-)}
+  )}
 `
 
 // const NetworkChooser = styled.div`
@@ -588,11 +590,11 @@ const Title = styled.h1`
   margin-bottom: 45px;
 
   ${breakpoint(
-  'medium',
-  `
+    'medium',
+    `
       margin-bottom: 40px;
     `
-)}
+  )}
 `
 
 // const OpenOrganization = styled.div`
